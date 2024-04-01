@@ -10,4 +10,5 @@ https://en.wikipedia.org/wiki/Mean_anomaly
 https://en.wikipedia.org/wiki/Orbital_node#Node_distinction
 
 Data verification with
-https://www.heavens-above.com/planets.aspx
+Planet positions at https://www.heavens-above.com/planets.aspx
+Julian date calculation at https://ssd.jpl.nasa.gov/tools/jdc/#/cd 
