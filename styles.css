@@ -1,0 +1,113 @@
+/* styles.css */
+        body {
+            background-color: #1f1f1f; /* Dark background color */
+            color: #ffffff; /* Light text color */
+            font-family: Arial, sans-serif; /* Specify font family */
+            margin: 0; /* Remove default margin */
+            padding: 0; /* Remove default padding */
+            display: flex; /* Use flexbox layout */
+            flex-direction: column; /* Arrange items vertically */
+            height: 100vh; /* Set full height of viewport */
+        }
+
+        #topFrame {
+            background-color: #333333; /* Dark background color for top frame */
+            color: #ffffff; /* Light text color for top frame */
+            padding: 10px; /* Add padding */
+            border: 1px solid #808080; /* Gray border */
+            
+         }
+
+        #topFrame h1 {
+            margin: 0; /* Remove default margin */
+            padding: 10px; /* Add padding */
+            text-align: center; /* Center align text */
+            color: #ffa500; /* Orange header text color */
+        }
+
+        #topFrame .navButtons {
+            display: flex; /* Use flexbox layout */
+            justify-content: left; /* Align items to the start */
+            align-items: center;
+            margin-top: 10px; /* Add margin to separate from heading */
+        }
+
+        #topFrame .navButtons button {
+            background-color: #ffa500; /* Orange button background color */
+            border: none; /* Remove border */
+            padding: 8px 16px; /* Add padding */
+            cursor: pointer; /* Change cursor to pointer on hover */
+            margin-right: 0px; /* Add right margin between buttons */
+        }
+
+        #topFrame .navButtons button:hover {
+            background-color: #ff8c00; /* Darker orange on hover */
+        }
+
+        #mainContent {
+            background-color: #292929; /* Darker background color for main content */
+            color: #ffffff; /* Light text color for main content */
+            padding: 10px; /* Add padding */
+            flex-grow: 1; /* Allow main content to grow to fill remaining space */
+            border: 1px solid #808080; /* Gray border */
+        }
+
+        h1 {
+            margin: 0; /* Remove default margin */
+            padding: 10px; /* Add padding */
+            text-align: center; /* Center align text */
+        }
+
+        label, button {
+            color: #ffffff; /* Light text color for labels and buttons */
+        }
+
+        input[type="datetime-local"] {
+            background-color: #333333; /* Dark background color for input */
+            color: #ffffff; /* Light text color for input */
+            border: 1px solid #ffffff; /* White border */
+            padding: 5px; /* Add padding for better appearance */
+            width: 200px; /* Set width */
+            margin: 10px; /* Add margin */
+        }
+
+        button {
+            background-color: #ffa500; /* Orange button background color */
+            border: none; /* Remove border */
+            padding: 10px 20px; /* Add padding */
+            cursor: pointer; /* Change cursor to pointer on hover */
+            margin: 10px; /* Add margin */
+            width: 200px; /* Set width */
+            display: block; /* Display as block element */
+            margin-left: auto; /* Align to right */
+            margin-right: auto; /* Align to right */
+        }
+
+        button:hover {
+            background-color: #ff8c00; /* Darker orange on hover */
+        }
+
+        #output {
+            margin-top: 20px; /* Add some space between input and output */
+            overflow-y: auto; /* Add vertical scroll if content exceeds viewport */
+        }
+
+        table {
+            border-collapse: collapse; /* Collapse table borders */
+            width: 100%; /* Table width to fill container */
+        }
+
+        th, td {
+            border: 1px solid #ffffff; /* White border for table cells */
+            padding: 8px; /* Add padding */
+            text-align: left; /* Align text to left */
+        }
+
+        th {
+            background-color: #333333; /* Dark background color for table headers */
+            color: #ffffff; /* Light text color for table headers */
+        }
+
+        tr:nth-child(even) {
+            background-color: #333333; /* Dark background color for even rows */
+        }
