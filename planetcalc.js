@@ -1,27 +1,56 @@
-  //Keplerian elements for the planets in the solar system
-    //a is semimajor axis in au
-    //e is eccentricity in rad
-    //i is inclination in degrees
-    //Ω is longitude of the ascending node in degrees (ascending node = where the orbiting body passes through the plane of the sun upwards)
-    //ω is longitude of perihelion in degrees (perihelion = closest to sun, generalized form is periapsis or closest apsis)
-    //L0 is the starting heliocentric longitude and/or mean longitude
-    //Tp is ime of Perihelion Passage (Tp) = 0 implies that the reference epoch is chosen to be when each planet passes through its perihelion.
+//Keplerian elements for the planets in the solar system
+//a is semimajor axis in au
+//e is eccentricity in rad
+//i is inclination in degrees
+//Ω is longitude of the ascending node in degrees (ascending node = where the orbiting body passes through the plane of the sun upwards)
+//ω is longitude of perihelion in degrees (perihelion = closest to sun, generalized form is periapsis or closest apsis)
+//L0 is the starting heliocentric longitude and/or mean longitude
+//Tp is ime of Perihelion Passage (Tp) = 0 implies that the reference epoch is chosen to be when each planet passes through its perihelion.
 const planetData = [
-    { name: 'Mercury', a: 0.3871, e: 0.2056, i: 7.005, Ω: 48.3396, ω: 77.4577, L0: 252.2503, Tp: 0, color: 0x9c9c9c },
-    { name: 'Venus', a: 0.7233, e: 0.0068, i: 3.3947, Ω: 76.6807, ω: 131.53298, L0: 181.97973, Tp: 0, color: 0xffaa33 },
-    { name: 'Earth', a: 1.0000, e: 0.0167, i: 0.00005, Ω: -11.2606, ω: 102.94719, L0: 100.46435, Tp: 0, color: 0x0000ff },
-    { name: 'Mars', a: 1.5237, e: 0.0934, i: 1.8497, Ω: 49.5581, ω: 336.0602, L0: 355.4533, Tp: 0, color: 0xff5733 },
-    { name: 'Jupiter', a: 5.2029, e: 0.0483, i: 1.3047, Ω: 100.5562, ω: 14.75385, L0: 34.40438, Tp: 0, color: 0xff5733 },
-    { name: 'Saturn', a: 9.5370, e: 0.0542, i: 2.4853, Ω: 113.715, ω: 92.43194, L0: 49.94432, Tp: 0, color: 0xff5733 },
-    { name: 'Uranus', a: 19.1913, e: 0.0472, i: 0.7726, Ω: 74.2299, ω: 170.96424, L0: 313.23218, Tp: 0, color: 0x00bfff },
-    { name: 'Neptune', a: 30.0690, e: 0.0086, i: 1.7697, Ω: 131.7217, ω: 44.97135, L0: 304.88003, Tp: 0, color: 0x00ffff }
+    { name: 'Mercury', a: 0.3871, e: 0.2056, i: 7.005, Ω: 48.3396, ω: 77.4577, L0: 252.2503, Tp: 0, color: 0x9c9c9c, disR: 3 },
+    { name: 'Venus', a: 0.7233, e: 0.0068, i: 3.3947, Ω: 76.6807, ω: 131.53298, L0: 181.97973, Tp: 0, color: 0xffaa33, disR: 5 },
+    { name: 'Earth', a: 1.0000, e: 0.0167, i: 0.00005, Ω: -11.2606, ω: 102.94719, L0: 100.46435, Tp: 0, color: 0x0000ff, disR: 6.5 },
+    { name: 'Mars', a: 1.5237, e: 0.0934, i: 1.8497, Ω: 49.5581, ω: 336.0602, L0: 355.4533, Tp: 0, color: 0xff5733, disR: 8 },
+    { name: 'Jupiter', a: 5.2029, e: 0.0483, i: 1.3047, Ω: 100.5562, ω: 14.75385, L0: 34.40438, Tp: 0, color: 0xff5733, disR: 10 },
+    { name: 'Saturn', a: 9.5370, e: 0.0542, i: 2.4853, Ω: 113.715, ω: 92.43194, L0: 49.94432, Tp: 0, color: 0xff5733, disR: 11 },
+    { name: 'Uranus', a: 19.1913, e: 0.0472, i: 0.7726, Ω: 74.2299, ω: 170.96424, L0: 313.23218, Tp: 0, color: 0x00bfff, disR: 13 },
+    { name: 'Neptune', a: 30.0690, e: 0.0086, i: 1.7697, Ω: 131.7217, ω: 44.97135, L0: 304.88003, Tp: 0, color: 0x00ffff, disR: 15 }
     ];
 
+      
+//set up scene
 const scene = new THREE.Scene();
+const camera = new THREE.PerspectiveCamera(75, 600 / 400, 0.1, 1000);
+const renderer = new THREE.WebGLRenderer();
+const animationContainer = document.getElementById('animationContainer');
+renderer.setSize(600, 400); // Set renderer size based on container dimensions
+animationContainer.appendChild(renderer.domElement);
 
+// Create a sun
+const sunGeometry = new THREE.SphereGeometry(1, 32, 32);
+const sunMaterial = new THREE.MeshBasicMaterial({ color: 0xffff00 });
+const sun = new THREE.Mesh(sunGeometry, sunMaterial);
+const light = new THREE.DirectionalLight(0xffffff, 1);
+
+//Create planets
+const planetGeometries = {}; // Store geometries to avoid redundant creation
 
 function calculatePositions() {
-                      
+         
+    //clear any previous animation
+    clearScene();
+
+    //(re)initialize the scene and add the sun and lighting
+    renderer.setSize(600, 400); // Set renderer size based on container dimensions
+    animationContainer.appendChild(renderer.domElement);
+    scene.add(sun);
+    light.position.set(0, 0, 0); // Sun's position
+    scene.add(light);
+
+    // Set camera position
+    camera.position.set(0, 0, 40); // Move the camera up along the y-axis
+    camera.lookAt(0, 0, 0); // Look at the origin (sun)
+
     // Get the user input date
     const dateInput = document.getElementById("dateInput").value;
     const currentDate = new Date(dateInput);
@@ -31,20 +60,17 @@ function calculatePositions() {
   
     // Results array to store the results for all planets
     const results = [];
-
+        
     // Calculate L, B, and r for each planet
     planetData.forEach(planet => {
         // Orbital period (in days)
         const P = 365.25 * Math.pow(planet.a, 1.5); // Kepler's third law
-        //for example, mercury would yield 87.96 days
-        
+                
         // Calculate mean anomaly (M) using JD in days not centuries
         const M = normalizeDegrees(planet.L0 + (360 / P) * (JD*36525 - planet.Tp));
-        //for example, on 3/31/24, it has been 8,854.50 days from Jan 1, 2000 
-        
+                
         // Calculate heliocentric longitude (L)
         // remember that longitude of perihelion is essentially the "starting point" for the Mean Anomaly 
-        //const L = M + planet.ω;
         const L = M;
        
          // Add heliocentric longitude (L) to the planet data
@@ -63,10 +89,24 @@ function calculatePositions() {
         // Add results to the results array
         results.push({ name: planet.name, L: L, B: B, r: r });
 
-    });
+        //create planet animations
+        const planetGeometry = new THREE.SphereGeometry(0.5, 32, 32);
+        const planetMaterial = new THREE.MeshBasicMaterial({ color: planet.color });
+        const planetMesh = new THREE.Mesh(planetGeometry, planetMaterial);
 
+        // Calculate the position of the planet based on its heliocentric longitude
+        const distanceFromSun = planet.disR * 2; // Adjust scale for visualization
+        const position = calculatePositionFromLongitude(planet.L, distanceFromSun);
+        planetMesh.position.copy(position);
+        scene.add(planetMesh);
+
+        
+        
+    });
+       
     // Display the results
     displayResults(results, currentDate, JD*36525);
+    
 }
 
 function calculateJulianDay(date) {
@@ -150,73 +190,20 @@ function calculateAngle(omega, current) {
 }
 
 function degreesToRadians(degrees) {
-return degrees * (Math.PI / 180);
+    return degrees * (Math.PI / 180);
 }
 
 function normalizeDegrees(degrees) {
- // Calculate the remainder when dividing by 360
- let normalized = degrees % 360;
+    // Calculate the remainder when dividing by 360
+    let normalized = degrees % 360;
 
- // If the result is negative, add 360 to make it positive
+    // If the result is negative, add 360 to make it positive
     if (normalized < 0) {
         normalized += 360;
- }
+    }
 
     return normalized;
 }
-
-function renderScene() {
-    // Clear the existing scene
-    while (animationContainer.firstChild) {
-        animationContainer.removeChild(animationContainer.firstChild);
-    }
-
-    // Add sun to the scene
-    scene.add(sun);
-
-    // Add planets to the scene with updated positions
-    planetData.forEach(planet => {
-        const distanceFromSun = planet.r * 10; // Adjust scale for visualization
-        const position = calculatePositionFromLongitude(planet.L, distanceFromSun);
-        planetMesh.position.copy(position);
-        scene.add(planetMesh);
-    });
-
-    // Re-render the scene
-    renderer.render(scene, camera);
-}
-
-calculatePositions();
-
-
-const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-const renderer = new THREE.WebGLRenderer();
-const animationContainer = document.getElementById('animationContainer');
-renderer.setSize(animationContainer.clientWidth, 550); // Set renderer size based on container dimensions
-animationContainer.appendChild(renderer.domElement);
-
-// Create a sun
-const sunGeometry = new THREE.SphereGeometry(1, 32, 32);
-const sunMaterial = new THREE.MeshBasicMaterial({ color: 0xffff00 });
-const sun = new THREE.Mesh(sunGeometry, sunMaterial);
-scene.add(sun);
-
-//Create planets
-const planetGeometries = {}; // Store geometries to avoid redundant creation
-planetData.forEach(planet => {
-    const planetGeometry = new THREE.SphereGeometry(0.5, 32, 32);
-    const planetMaterial = new THREE.MeshBasicMaterial({ color: planet.color });
-    const planetMesh = new THREE.Mesh(planetGeometry, planetMaterial);
-
-    // Calculate the position of the planet based on its heliocentric longitude
-    const distanceFromSun = planet.r * 6; // Adjust scale for visualization
-    const position = calculatePositionFromLongitude(planet.L, distanceFromSun);
-    console.log(position,"is the position for",planet.name);
-    console.log(planet.L,"is the longitude for",planet.name);
-    planetMesh.position.copy(position);
-
-    scene.add(planetMesh);
-});
 
 // Function to calculate position from heliocentric longitude
 function calculatePositionFromLongitude(longitude, distance) {
@@ -227,20 +214,35 @@ function calculatePositionFromLongitude(longitude, distance) {
     return new THREE.Vector3(x, y, 0);
 }
 
-// Add lighting
-const light = new THREE.DirectionalLight(0xffffff, 1);
-light.position.set(0, 0, 0); // Sun's position
-scene.add(light);
+function createPlanetLabel(planet) {
+    const label = new THREE.TextSprite({
+        textSize: 0.5,
+        texture: {
+            text: planet.name,
+            fontFamily: 'Arial, sans-serif',
+        }
+    });
 
-// Set camera position
-camera.position.set(0, 0, 60); // Move the camera up along the y-axis
-camera.lookAt(0, 0, 0); // Look at the origin (sun)
+    // Position label relative to the planet's position
+    const planetPosition = calculatePositionFromLongitude(planet.L, planet.disR * 2); // Assuming the same scale as the planets
+    label.position.copy(planetPosition);
+    label.position.y += 0.5; // Offset label slightly above the planet
+
+    return label;
+}
 
 // Render loop
 function animate() {
+    
     requestAnimationFrame(animate);
     renderer.render(scene, camera);
 }
 
-// Run animation
+function clearScene() {
+    while (scene.children.length > 0) {
+        scene.remove(scene.children[0]);
+    }
+}
+
+calculatePositions();
 animate();
