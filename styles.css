@@ -67,7 +67,7 @@
             border-right: 1px solid #808080; /* Gray border on the right */
             box-sizing: border-box; /* Include padding and border in the width */
         }
-        
+
         #mainContent {
             background-color: #1a1919; /* Darker background color for main content */
             color: #ffffff; /* Light text color for main content */
@@ -145,11 +145,17 @@
         }
         
         #animationContainer {
-            width: 50%; /* Set the width of the animation container to 500% */
-            height: 550px; /* Set a fixed height for the animation container */
+            width: 600px; /* Set the width of the animation container to 50% */
+            height: 400px; /* Set a fixed height for the animation container */
             position: relative;
             left: 18px; /* Padding from the left edge */
-            overflow-y: auto;
+            
+        }
+
+        #mainContainer {
+            display: flex;
+            height: calc(100vh-80px); /* Set the container height to 100% of the viewport height, minus the topframe */
+            overflow-y: auto; /* Add vertical scrollbar if content exceeds container height */
         }
 
         #container {
@@ -157,10 +163,10 @@
             overflow-y: auto; /* Add vertical scrollbar if content exceeds container height */
         }
 
-        #container::-webkit-scrollbar {
+        #maincontainer::-webkit-scrollbar {
             width: 10px; /* Set the width of the scrollbar */
         }
-        #container::-webkit-scrollbar-thumb {
+        #maincontainer::-webkit-scrollbar-thumb {
             background-color: #555; /* Set the color of the scrollbar thumb */
             border-radius: 5px; /* Add some border radius for a rounded look */
         }
