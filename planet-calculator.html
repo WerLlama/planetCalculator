@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Solar System Planets Position Calculator</title>
+    <title>Planet Position Calculator</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -11,20 +11,32 @@
         <h1>James' homepage</h1>
         <div class="navButtons">
             <button onclick="location.href='index.html'">About</button>
-            <button onclick="location.href='planet-calculator.html'">Planet Calculator</button>
-            <button onclick="location.href='https://github.com/WerLlama'">GitHub</button>
+            <button onclick="location.href='planet-calculator.html'">Planet Position Calculator</button>
+            <button onclick="location.href='space-epidemiology.html'">Human Spaceflight Epidemiology</button>
+            <button onclick="location.href='https://github.com/WerLlama'">Werllama GitHub</button>
         </div>
     </div>
-        <div id="mainContent" style="flex-grow: 1;">
-            <!-- Main content goes here -->
-            <h1>Solar System Planets Position Calculator</h1>
-            <label for="dateInput">Enter the desired date and time:</label>
+     
+        
+    <div id="container" style="overflow-y: auto;">
+        <h1>Planet position calculator</h1>
+        <div style="display: flex; align-items: center;"> <!-- Container for date input and button -->
+            <label for="dateInput" style="margin-left: 18px">Desired date and time (default is current time):</label>
             <input type="datetime-local" id="dateInput">
             <button onclick="calculatePositions()">Calculate</button>
-            <div id="output"></div>
         </div>
+        <div id="output"></div> <!-- container for the table output -->
+        <div id="animationContainer"></div> <!-- container for the planet animation -->
     </div>
-
+    
+    
+   
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="settime.js"></script>
     <script src="planetcalc.js"></script>
+    
+    
+
+    <!-- <script src="renderPlanets.js"></script> -->
 </body>
 </html>
