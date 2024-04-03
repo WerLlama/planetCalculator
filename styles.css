@@ -11,7 +11,7 @@
         }
 
         #topFrame {
-            background-color: #333333; /* Dark background color for top frame */
+            background-color: #000000; /* Dark background color for top frame */
             color: #ffffff; /* Light text color for top frame */
             padding: 10px; /* Add padding */
             border: 1px solid #808080; /* Gray border */
@@ -19,43 +19,67 @@
          }
 
         #topFrame h1 {
-            margin: 0; /* Remove default margin */
-            padding: 10px; /* Add padding */
-            text-align: center; /* Center align text */
+            margin: 5px; /* Remove default margin */
+            padding: 5px; /* Add padding */
+            margin-left: 13px;
+            text-align: left; /* Center align text */
             color: #ffa500; /* Orange header text color */
         }
 
         #topFrame .navButtons {
-            display: flex; /* Use flexbox layout */
-            justify-content: left; /* Align items to the start */
+            display: flex;
+            justify-content: flex-start;
             align-items: center;
-            margin-top: 10px; /* Add margin to separate from heading */
+            margin-top: 5px;
+            padding: 0;
         }
-
+        
         #topFrame .navButtons button {
-            background-color: #ffa500; /* Orange button background color */
-            border: none; /* Remove border */
-            padding: 8px 16px; /* Add padding */
-            cursor: pointer; /* Change cursor to pointer on hover */
-            margin-right: 0px; /* Add right margin between buttons */
-        }
-
+            background-color: #000000; /* GitHub's button background color */
+            color: #ffffff; /* White text color */
+            border: none;
+            border-radius: 6px; /* Rounded corners */
+            padding: 8px 16px;
+            cursor: pointer;
+            margin-right: 5px; /* Add a small right margin */
+            margin-left: 5px;
+            margin-bottom: 0px;
+            font-size: 14px;
+            font-weight: 600;
+            text-decoration: none; /* Remove underline */
+        }            
+                       
         #topFrame .navButtons button:hover {
-            background-color: #ff8c00; /* Darker orange on hover */
+            background-color: #092b52; /* Darker color on hover */
         }
-
+        
+        /* Optional: Add focus styles for accessibility */
+        #topFrame .navButtons button:focus {
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(3, 102, 214, 0.3); /* GitHub's focus style */
+        }
+        
+        #leftFrame {
+            width: 200px; /* Adjust the width as needed */
+            background-color: #333; /* Dark background color */
+            color: #fff; /* Light text color */
+            padding: 10px; /* Add some padding */
+            border-right: 1px solid #808080; /* Gray border on the right */
+            box-sizing: border-box; /* Include padding and border in the width */
+        }
+        
         #mainContent {
-            background-color: #292929; /* Darker background color for main content */
+            background-color: #1a1919; /* Darker background color for main content */
             color: #ffffff; /* Light text color for main content */
-            padding: 10px; /* Add padding */
+            padding: 13px; /* Add padding */
             flex-grow: 1; /* Allow main content to grow to fill remaining space */
             border: 1px solid #808080; /* Gray border */
         }
 
         h1 {
-            margin: 0; /* Remove default margin */
-            padding: 10px; /* Add padding */
-            text-align: center; /* Center align text */
+            margin: 13px; /* Remove default margin */
+            padding: 5px; /* Add padding */
+            text-align: left; /* Center align text */
         }
 
         label, button {
@@ -69,32 +93,36 @@
             padding: 5px; /* Add padding for better appearance */
             width: 200px; /* Set width */
             margin: 10px; /* Add margin */
+            margin-left: 5px;
         }
 
         button {
-            background-color: #ffa500; /* Orange button background color */
+            background-color: #24292e; /* Orange button background color */
             border: none; /* Remove border */
+            border-radius: 6px;
             padding: 10px 20px; /* Add padding */
             cursor: pointer; /* Change cursor to pointer on hover */
             margin: 10px; /* Add margin */
-            width: 200px; /* Set width */
+            width: auto; /* Set width */
             display: block; /* Display as block element */
-            margin-left: auto; /* Align to right */
-            margin-right: auto; /* Align to right */
+            margin-left: 5px; /* Align to right */
+            margin-right: 5px; /* Align to right */
         }
 
         button:hover {
-            background-color: #ff8c00; /* Darker orange on hover */
+            background-color: #092b52; /* Darker orange on hover */
         }
 
         #output {
-            margin-top: 20px; /* Add some space between input and output */
+            margin-top: 10px; /* Add some space between input and output */
             overflow-y: auto; /* Add vertical scroll if content exceeds viewport */
+            padding: 5px;
+            margin-left: 13px;
         }
 
         table {
             border-collapse: collapse; /* Collapse table borders */
-            width: 100%; /* Table width to fill container */
+            width: auto; /* Table width to fill container */
         }
 
         th, td {
@@ -111,3 +139,30 @@
         tr:nth-child(even) {
             background-color: #333333; /* Dark background color for even rows */
         }
+
+        #output {
+            margin-bottom: 40px; /* Add margin to create space between the output table and the animation */
+        }
+        
+        #animationContainer {
+            width: 50%; /* Set the width of the animation container to 500% */
+            height: 550px; /* Set a fixed height for the animation container */
+            position: relative;
+            left: 18px; /* Padding from the left edge */
+            overflow-y: auto;
+        }
+
+        #container {
+            height: 100vh; /* Set the container height to 80% of the viewport height */
+            overflow-y: auto; /* Add vertical scrollbar if content exceeds container height */
+        }
+
+        #container::-webkit-scrollbar {
+            width: 10px; /* Set the width of the scrollbar */
+        }
+        #container::-webkit-scrollbar-thumb {
+            background-color: #555; /* Set the color of the scrollbar thumb */
+            border-radius: 5px; /* Add some border radius for a rounded look */
+        }
+
+       
