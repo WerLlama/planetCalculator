@@ -18,25 +18,32 @@
     </div>
      
         
-    <div id="container" style="overflow-y: auto;">
-        <h1>Planet position calculator</h1>
-        <div style="display: flex; align-items: center;"> <!-- Container for date input and button -->
-            <label for="dateInput" style="margin-left: 18px">Desired date and time (default is current time):</label>
-            <input type="datetime-local" id="dateInput">
-            <button onclick="calculatePositions()">Calculate</button>
+    <div id="mainContainer">
+        <div id="leftFrame">
+            <!-- Content for the left frame goes here -->
         </div>
-        <div id="output"></div> <!-- container for the table output -->
-        <div id="animationContainer"></div> <!-- container for the planet animation -->
+        <div id="mainContent">
+
+            <h1>Planet position calculator</h1>
+            <div style="display: flex; align-items: center;"> <!-- Container for date input and button -->
+                <label for="dateInput" style="margin-left: 18px">Desired date and time (default is current time):</label>
+                <input type="datetime-local" id="dateInput">
+                <button onclick="calculatePositions()">Calculate</button>
+            </div>
+            <div id="container">
+                <div id="output"></div> <!-- container for the table output -->
+                <div id="animationContainer"></div> <!-- container for the planet animation -->
+            </div>
+            
+        </div>
     </div>
-    
-    
+       
    
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script src="settime.js"></script>
     <script src="planetcalc.js"></script>
-    
-    
+     
 
-    <!-- <script src="renderPlanets.js"></script> -->
+    
 </body>
 </html>
